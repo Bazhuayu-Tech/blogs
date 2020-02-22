@@ -45,7 +45,7 @@ pm.response.to.have.body("response_body_string");
 
 在右侧设置完接口请求信息后点击保存--save
 
-![图片1](images/图片1.png)
+![图片1](https://github.com/ximeijie/blogs/blob/master/images/%E5%9B%BE%E7%89%871.png)
 
 第三步，在postman中进行测试
 
