@@ -60,4 +60,4 @@ cmd输入 npm install newman
 
 第七步，控制台查看输出文件
 
-![image8]((https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic8.png)
+![image8](https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic8.png)
