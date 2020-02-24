@@ -27,7 +27,7 @@ pm.response.to.have.body("response_body_string");
 
 在右侧设置完接口请求信息后点击保存--save
 
- ![pic1](../images/1/pic1.png)
+ ![pic1](blogs/images/1/pic1.png)
  ![a](../images/0/createpullrequest.png)
 第三步，在postman中进行测试
 在postman中添加完需要测试的请求后，可以进行合并测试
