@@ -29,11 +29,11 @@ pm.response.to.have.body("response_body_string");
  ![pic1](https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic1.png)
 第三步，在postman中进行测试
 在postman中添加完需要测试的请求后，可以进行合并测试
-![image2](images/1/pic2.png)
+![pic2](https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic2.png)
 
 第四步，导出到json文件
 通过export导出为json文件到本地，选择collection v2
-![image3](images/1/pic3.png)
+![pic3](https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic3.png)
 
 第五步，搭建Jenkins+newman环境
 1、搭建Jenkins环境
@@ -45,19 +45,19 @@ cmd输入 npm install newman
 
 第六步，Jenkins设置
 1、新增自由构建
-![image4](images/1/pic4.png)
+![image4](https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic4.png)
 2、构建触发器，为了定时运行
  H/5  * * * * 
-![image5](images/1/pic5.png)
+![image5](https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic5.png)
 3、添加构建命令，运行相应json文件
 #!/bin/sh -l
        cd /usr/local
        newman run octopus_API.postman_collection.json
-![image6](images/1/pic6.png)
+![image6](https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic6.png)
 4、设置邮件接收错误构建信息
 构建不成功的以邮箱的形式通知。
-![image7](images/1/pic7.png)
+![image7](https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic7.png)
 
 第七步，控制台查看输出文件
 
-![image8](images/1/pic8.png)
+![image8]((https://raw.githubusercontent.com/ximeijie/blogs/master/images/1/pic8.png)
