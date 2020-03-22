@@ -49,7 +49,7 @@ docker run -d -p 0.0.0.0:9200:9200 -p 9300:9300 --name elasticsearch -e "discove
 ```
 3. es的管理工具 [https://github.com/mobz/elasticsearch-head#running-with-built-in-server](https://github.com/mobz/elasticsearch-head#running-with-built-in-server) ， 这里直接用现成的[Chrome 插件]([https://chrome.google.com/webstore/detail/elasticsearch-head/ffmkiejjmecolpfloofpjologoblkegm/](https://chrome.google.com/webstore/detail/elasticsearch-head/ffmkiejjmecolpfloofpjologoblkegm/)
 )就可以，成功后可以看见如下图：
-![es head.jpg](https://raw.githubusercontent.com/bzylt/blogs/blob/master/images/5/es%20head.jpg)
+![es head.jpg](https://raw.githubusercontent.com/bzylt/blogs/master/images/5/es%20head.jpg)
 - 然后输入es的地址即可
 
 
