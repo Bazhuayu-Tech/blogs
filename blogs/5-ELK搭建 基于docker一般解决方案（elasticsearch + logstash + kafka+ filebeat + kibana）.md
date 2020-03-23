@@ -13,7 +13,7 @@
 1. 准备centos7.x服务器，云服务器、本机、vmware 虚拟机都可以
 > 这里我是用的VMware的虚拟机（网上找的绿色版）
 2. 待启动后，安装docker，然后启动docker服务
-```
+```shell
 # 先创建目录
 mkdir ~/elk
 mkdir ~/log_producer
@@ -28,7 +28,7 @@ sudo systemctl start docker
 docker run -d -p 0.0.0.0:9200:9200 -p 9300:9300 --name elasticsearch -e "discovery.type=single-node" elasticsearch:7.5.2
 ```
 2. 浏览器访问[http://ip:9200/](http://ip:9200/) 看见类似如下即说明启动成功了
-```
+```json
 {
   "name" : "b79d7d5cada9",
   "cluster_name" : "docker-cluster",
@@ -55,7 +55,7 @@ docker run -d -p 0.0.0.0:9200:9200 -p 9300:9300 --name elasticsearch -e "discove
 
 ##### 四、启动kibana
 1. 启动命令
-```
+```shell
 #一般内部使用的话，单个kibana就足够了
 docker run -d -p 5601:5601 --link elasticsearch -e ELASTICSEARCH_URL=http://elasticsearch:9200 kibana:7.5.2
 ```
@@ -64,7 +64,7 @@ docker run -d -p 5601:5601 --link elasticsearch -e ELASTICSEARCH_URL=http://elas
 ##### 五、然后启动kafka单节点
 > 由于kafka是依赖zookeeper的，所以，我们先启动zookeeper，不过由于没官方的docker镜像，所以就选择维护比较频繁的社区镜像 wurstmeister/zookeeper、wurstmeister/kafka
 1.  zookeeper启动命令
-```
+```shell
 docker run --name zookeeper -p 2181:2181 wurstmeister/zookeeper
 ```
 2. kafka启动命令，这里使用kafka 这个host，主要是为了外网（其他的机器）可以访问
@@ -86,7 +86,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {topicNa
 
 ##### 六、启动logstash
 1. 修改 /elk/logstash.conf，内容为：
-```
+```yml
 input {
 #    beats {
 #       port => "5044"
@@ -129,7 +129,7 @@ output {
 ```
 
 2. 启动命令, 这里修改了kafka这个host的地址，实际为kafka的宿主机ip，原因在于连接kafka后，回去获取metadata，其中的连接地址就是kafka:9092，所以这里弄好映射
-```
+```shell
 docker run --rm -it -p 5044:5044 --add-host kafka:192.168.117.132 --name logstash \
 --link elasticsearch \
 -v ~/elk/logstash.conf:/usr/share/logstash/pipeline/logstash.conf \
@@ -138,7 +138,7 @@ docker run --rm -it -p 5044:5044 --add-host kafka:192.168.117.132 --name logstas
 ##### 七、filebeat，日志文件收集器
 > 日志文件收集器，可以定义output push到kafka
 1. 定义/elk/filebeat.xml ,输入以下内容：
-```
+```yml
 filebeat.inputs:
 - type: log
   enabled: true
@@ -174,12 +174,12 @@ docker.elastic.co/beats/filebeat:7.5.2
 
 ##### 八、测试
 1. 我们可以手动在~/log_producer/log下产生日志
-```
+```shell
 mkdir /log_producer/log
 vim /log_producer/log/test1.log
 ```
 - 输入以下内容：
-```
+```json
 {"startTime":"2020-02-10T07:43:44.049Z","categoryName":"main","data":["test message","1015"],"level":{"level":20000,"levelStr":"INFO","colour":"green"},"context":{},"pid":107082}
 {"startTime":"2020-02-10T07:43:46.391Z","categoryName":"main","data":["test message","1016"],"level":{"level":20000,"levelStr":"INFO","colour":"green"},"context":{},"pid":107082}
 {"startTime":"2020-02-10T07:43:48.392Z","categoryName":"main","data":["test message","1017"],"level":{"level":20000,"levelStr":"INFO","colour":"green"},"context":{},"pid":107082}
