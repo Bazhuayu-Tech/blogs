@@ -1,4 +1,4 @@
-##### 一、首先让我们看一下主要的架构图
+## 一、首先让我们看一下主要的架构图
 ![ELK 架构图.png](https://raw.githubusercontent.com/bzylt/blogs/master/images/5/ELK%20架构.png)
 
 - 可以看见整体的架构
@@ -9,7 +9,7 @@
 5. kibana，这个node应用主要用于友好界面展示es的数据，方便我们分析和聚合
 - 接下来我们先按图运行单节点版（后续再改多节点集群）的该架构
 
-##### 二、基础准备
+## 二、基础准备
 1. 准备centos7.x服务器，云服务器、本机、vmware 虚拟机都可以
 > 这里我是用的VMware的虚拟机（网上找的绿色版）
 2. 待启动后，安装docker，然后启动docker服务
@@ -22,7 +22,7 @@ sudo yum update
 sudo yum install docker 
 sudo systemctl start docker
 ```
-##### 三、使用docker启动elasticsearch 
+## 三、使用docker启动elasticsearch 
 1. 启动命令
 ```
 docker run -d -p 0.0.0.0:9200:9200 -p 9300:9300 --name elasticsearch -e "discovery.type=single-node" elasticsearch:7.5.2
@@ -53,7 +53,7 @@ docker run -d -p 0.0.0.0:9200:9200 -p 9300:9300 --name elasticsearch -e "discove
 - 然后输入es的地址即可
 
 
-##### 四、启动kibana
+## 四、启动kibana
 1. 启动命令
 ```shell
 #一般内部使用的话，单个kibana就足够了
@@ -61,7 +61,7 @@ docker run -d -p 5601:5601 --link elasticsearch -e ELASTICSEARCH_URL=http://elas
 ```
 - 等待一会儿  访问[http://ip:5601](http://ip:5601/) ， 应该可以访问kibana的web界面了![kibana home.jpg](https://raw.githubusercontent.com/bzylt/blogs/master/images/5/kibana%20home.jpg)
 
-##### 五、然后启动kafka单节点
+## 五、然后启动kafka单节点
 > 由于kafka是依赖zookeeper的，所以，我们先启动zookeeper，不过由于没官方的docker镜像，所以就选择维护比较频繁的社区镜像 wurstmeister/zookeeper、wurstmeister/kafka
 1.  zookeeper启动命令
 ```shell
@@ -84,7 +84,7 @@ bin/kafka-topics.sh --list --zookeeper zookeeper:2181
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {topicName} --from-beginning
 ```
 
-##### 六、启动logstash
+## 六、启动logstash
 1. 修改 /elk/logstash.conf，内容为：
 ```yml
 input {
@@ -135,7 +135,7 @@ docker run --rm -it -p 5044:5044 --add-host kafka:192.168.117.132 --name logstas
 -v ~/elk/logstash.conf:/usr/share/logstash/pipeline/logstash.conf \
  docker.elastic.co/logstash/logstash:7.5.2
 ```
-##### 七、filebeat，日志文件收集器
+## 七、filebeat，日志文件收集器
 > 日志文件收集器，可以定义output push到kafka
 1. 定义/elk/filebeat.xml ,输入以下内容：
 ```yml
@@ -172,7 +172,7 @@ docker.elastic.co/beats/filebeat:7.5.2
 
 ```
 
-##### 八、测试
+## 八、测试
 1. 我们可以手动在~/log_producer/log下产生日志
 ```shell
 mkdir /log_producer/log
