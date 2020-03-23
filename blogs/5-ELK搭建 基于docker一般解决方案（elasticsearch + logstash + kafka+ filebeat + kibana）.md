@@ -125,8 +125,8 @@ filter{
 output {
     elasticsearch {
         hosts => ["elasticsearch:9200"]
-	ilm_enabled => "false"
-	index => "cloudnode-%{[topic]}-%{+yyyy.MM.dd}"
+        ilm_enabled => "false"
+        index => "cloudnode-%{[topic]}-%{+yyyy.MM.dd}"
     }
 }
 ```
