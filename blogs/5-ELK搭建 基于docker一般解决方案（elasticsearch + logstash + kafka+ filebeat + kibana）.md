@@ -1,3 +1,6 @@
+#ELK搭建 基于docker一般解决方案（elasticsearch + logstash + kafka+ filebeat + kibana）
+> 当我们有多台服务器上的服务日志需要管理的时候，这时候一台台ssh上去看，着实不方便，所以我们急需一个集中管理查看的方案，这时候可以考虑elk（使用docker纯粹为了环境搭建方便且后续管理着想）
+
 ## 一、首先让我们看一下主要的架构图
 ![ELK 架构图.png](https://raw.githubusercontent.com/bzylt/blogs/master/images/5/ELK%20架构.png)
 
